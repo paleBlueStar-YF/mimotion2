@@ -8,7 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    strategy:
+      matrix:        
+        #config-name: [CONFIG, CONFIG1, CONFIG2, CONFIG3, CONFIG4, CONFIG5, CONFIG6, CONFIG7, CONFIG8, CONFIG9]
+        config-name: [CONFIG, CONFIG1, CONFIG2, CONFIG3, CONFIG10] # 假设你有 CONFIG1 和 CONFIG2 这两个 Secrets
+    timeout-minutes: 240
     steps:
       - name: Checkout codes
         uses: actions/checkout@v3
@@ -24,7 +28,7 @@ jobs:
           
       - name: 开始
         env:
-            CONFIG: ${{ secrets.CONFIG }}
+            CONFIG: ${{ secrets[matrix.config-name] }} # 使用矩阵策略动态选择 Secret
         run: |
           pip3 install requests pytz
           python3 main.py
