@@ -2,7 +2,7 @@ name: 刷步数
 
 on:
   schedule:
-    - cron: '56 2 * * *'
+    - cron: '56 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:        
         #config-name: [CONFIG, CONFIG1, CONFIG2, CONFIG3, CONFIG4, CONFIG5, CONFIG6, CONFIG7, CONFIG8, CONFIG9]
-        config-name: [CONFIG, CONFIG1, CONFIG2] # 假设你有 CONFIG1 和 CONFIG2 这两个 Secrets
+        config-name: [CONFIG0, CONFIG1, CONFIG2] # 假设你有 CONFIG1 和 CONFIG2 这两个 Secrets
     timeout-minutes: 240
     steps:
       - name: Checkout codes
